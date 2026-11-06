@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "An Arduino / ESP sketch project",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique project identifier" },
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "name": { "type": "string", "description": "Project title" },
+        "code": { "type": "string", "description": "Arduino C++ sketch source code" },
+        "boardId": { "type": "string", "description": "Target microcontroller board ID" },
+        "port": { "type": "string", "description": "Selected serial port or protocol" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp of creation" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp of last update" }
+      },
+      "required": ["id", "userId", "name", "code", "boardId"]
+    },
+    "ProjectChatMessage": {
+      "title": "ProjectChatMessage",
+      "description": "A persistent AI chat message scoped to a specific project sketch",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique message identifier" },
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "projectId": { "type": "string", "description": "Associated project ID" },
+        "role": { "type": "string", "enum": ["user", "model"], "description": "Sender role" },
+        "text": { "type": "string", "description": "Chat message content" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Message timestamp" }
+      },
+      "required": ["id", "userId", "projectId", "role", "text"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "User sketch projects"
+    },
+    "/users/{userId}/projects/{projectId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ProjectChatMessage" },
+      "description": "Chat log file per project"
+    }
+  }
+}

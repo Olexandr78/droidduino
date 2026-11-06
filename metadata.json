@@ -1,0 +1,6 @@
+{
+  "name": "DroidDuino AI",
+  "description": "Arduino & ESP32 mobile IDE with Gemini AI Studio coding assistant, syntax editor, compiler checks, serial monitor, and pinouts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "database": "ai-studio-android-droiddui-c4ae4667-9fde-48d3-bdb2-f559b5fad097",
+    "rules": "firestore.rules"
+  }
+}
