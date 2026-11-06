@@ -27,21 +27,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
+      - name: Set up Android SDK and required packages
         uses: android-actions/setup-android@v3
         with:
-          accept-android-sdk-licenses: false
+          accept-android-sdk-licenses: true
           log-accepted-android-sdk-licenses: false
-          packages: platform-tools
-
-      - name: Accept SDK licenses and install required packages
-        shell: bash
-        run: |
-          # sdkmanager exits after accepting licenses; avoid treating the
-          # yes process's expected SIGPIPE as a workflow failure.
-          set +o pipefail
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-36" "platforms;android-36-ext1" "build-tools;36.0.0"
+          packages: |
+            platform-tools
+            platforms;android-36
+            platforms;android-36-ext1
+            build-tools;36.0.0
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
