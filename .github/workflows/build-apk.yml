@@ -22,17 +22,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: false
+          log-accepted-android-sdk-licenses: false
 
-      - name: Accept SDK licenses and install platform
+      - name: Accept SDK licenses and install required packages
+        shell: bash
         run: |
-          yes | sdkmanager --licenses >/dev/null
+          sdkmanager --licenses < <(yes)
           sdkmanager "platform-tools" "platforms;android-36" "platforms;android-36-ext1" "build-tools;36.0.0"
 
       - name: Set up Gradle
