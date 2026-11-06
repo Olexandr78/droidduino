@@ -32,12 +32,13 @@ jobs:
         with:
           accept-android-sdk-licenses: false
           log-accepted-android-sdk-licenses: false
+          packages: platform-tools
 
       - name: Accept SDK licenses and install required packages
         shell: bash
         run: |
-          sdkmanager --licenses < <(yes)
-          sdkmanager "platform-tools" "platforms;android-36" "platforms;android-36-ext1" "build-tools;36.0.0"
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-36" "platforms;android-36-ext1" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
